@@ -48,9 +48,43 @@ _We are going to build ChatBot on the Nutrients Book. Steps:_
 4. Build a Retrieval system that uses vector search to find relevant chunk of text based on a query.
 5. Create a prompt that incorporates the retrieved pieces of text.
 6. Generate an answer to a query based on the passages of the textbook withat an LLM.
+<hr>
 
 # Project Methodology:
 ![alt text](./assets/Methdology.png)
+<hr>
+
+# DOWNLOADING MODEL LOCALLY:
+1. Go to Hugging Face, then create a token from `settings`.
+2. Do the following steps:
+```python
+import os 
+from huggingface_hub import hf_hub_download
+
+HUGGING_FACE_API_KEY = "YOUR_GENERATED_KEY"
+
+model_id = "google/gemma-3-1b-it"
+filenames = [
+    "added_tokens.json", "config.json", "special_tokens_map.json", "tokenizer_config.json",
+    "generation_config.json", "tokenizer.model", "tokenizer.json", "model.safetensors"
+]
+```
+This will download the model in you local machine.
+3. Test:
+```python
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+model_id = "google/gemma-3-1b-it"
+
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(model_id)
+
+inputs = tokenizer("Hello, how are you?", return_tensors="pt")
+outputs = model.generate(**inputs, max_length=50)
+print(tokenizer.decode(outputs[0], skip_special_tokens=True))
+```
+
+<hr>
 
 # Key Terms & Description:
 
