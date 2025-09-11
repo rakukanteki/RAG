@@ -208,4 +208,5 @@ __marimo__/
 
 *.pdf
 *.csv
-.ipynb_checkpoints
+.env
+*.ipynb_checkpoints
